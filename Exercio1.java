@@ -5,7 +5,7 @@ No final informar o nome do aluno e a sua média (aritmética).*/
 
 public class Exercio1 {
 
-    public static void m(String[] args) {
+    public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
 
