@@ -5,7 +5,7 @@ homem ou mulher. No final informe total de homens e de mulheres. */
 
 public class Exercio11 {
 
-    public static void main(String[] args) {
+    public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
 

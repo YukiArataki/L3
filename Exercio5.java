@@ -17,8 +17,7 @@ public class Exercio5 {
 
         double valorParcelado = valorDacompra/5;
 
-        System.out.println("O valor da parcela he de " + valorParcelado);
-
+        System.out.println("O valor da parcela é de " + valorParcelado);
 
     }
 

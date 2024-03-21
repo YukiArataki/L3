@@ -1,7 +1,12 @@
 public class Programa {
 
     public static void main(String[] args){
-        Exercio5.executar();
+
+        //Exercio1.executar();
+        //Exercio3.executar();
+        //Exercio11.executar();
+        //Exercio5.executar();
+        Exercio21.executar();
 
     }
 

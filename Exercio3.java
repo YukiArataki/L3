@@ -7,7 +7,7 @@ informar o seu nome, o salário fixo e salário no final do mês. */
 
 public class Exercio3 {
 
-    public static void main(String[] args) {
+    public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
 
