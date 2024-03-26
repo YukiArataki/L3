@@ -14,29 +14,14 @@ public class Exercio21 {
 
         Scanner leitor = new Scanner(System.in);
 
-        Double idade;
-        char letra;
-        String categoria;
+        String[] categorias = new String[]{"Infantil A","Infantil B","Juvenil A","Juvenil B","Sênior = 18","idade fora da faixa etária"};
+        
+        Nadador competidor = new Nadador();
 
-            do {
-
-                System.out.print("Digite a idade do nadador: ");
-                idade = leitor.nextDouble();
-                if(idade < 5) System.out.println("Idade inválida.");
-                
-            }while (idade < 25);
-
-            System.out.println();
-
-            if (idade >= 5 && idade < 7) categoria = "Infantil A";
-            else if(idade >= 8 && idade < 10) categoria = "Infantil B";
-            else if(idade >= 11 && idade < 13) categoria = "Juvenil A";
-            else if(idade >= 14 && idade < 17) categoria = "Juvenil B"; 
-            else categoria = "Senior";
-
-            System.out.println("A categoria é:" + categoria);
-
-            System.out.println("Idade está fora da faixa etária");
+        Prompt.separador();
+        competidor.getIdade(Prompt.lerInteiro("Idade do competidor: "));
+        Prompt.imprimir("Categoria: " + categorias[competidor.categoria]);
+        Prompt.separador();
 
     }
 

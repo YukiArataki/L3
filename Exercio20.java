@@ -14,6 +14,29 @@ public class Exercio20 {
     public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
-    }
 
+        int nivel;
+        boolean valido;
+        
+        Prompt.separador();
+        do{ 
+            valido = false;
+            nivel = Prompt.lerInteiro("Nivel do Professor: (1,2 ou 3):");
+
+            if(nivel <= 1 && nivel >= 3){
+                Prompt.imprimir("Nível inválido\nDigite novamente\n");
+            }else{
+                valido = true;
+            }
+        }while(valido == false);
+        HoraAula professor = new HoraAula();
+
+        professor.getNivelEDefinirHA(nivel);
+
+        String txt = String.format("%.2f", professor.valorHA).replace(",", ".");
+
+        Prompt.imprimir("Professor Nível "+professor.nivel+" R$"+txt+" por hora/aula");
+        Prompt.separador();
+
+    }
 }

@@ -12,7 +12,7 @@ public class Exercio11 {
         String nome, sexo;
         Short homem = 0, mulher = 0;
 
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i <= 56; i++) {
 
             System.out.println("Informe o seu nome: ");
             nome = leitor.next();

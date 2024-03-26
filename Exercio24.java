@@ -12,6 +12,36 @@ public class Exercio24 {
     public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
+
+        Aluno aluno = new Aluno(3);
+        int flag;
+
+        for(int i = 0; i < aluno.nProvas; i++){
+
+            do{
+
+            aluno.notas[i] = Prompt.lerDecimal("Nota["+(i + 1)+"]:");
+            
+            flag = 0;
+
+            if(aluno.notas[i] <= 10 && aluno.notas[i] >= 0){
+
+            }else{
+                System.out.println("nota inválida");
+                flag++;
+            }
+            }while(flag == 1);
+            aluno.pesos[0] = 2;
+            aluno.pesos[1] = 3;
+            aluno.pesos[2] = 5;
+
+            aluno.notaFinal = ((aluno.notas[0] * aluno.pesos[0]) + (aluno.notas[1] * aluno.pesos[1]) + (aluno.notas[2] * aluno.pesos[2]))/(aluno.pesos[0] + aluno.pesos[1] + aluno.pesos[2]);
+            
+        }
+        Prompt.separador();
+        Prompt.imprimir("Nota final: "+aluno.notaFinal);
+        Prompt.separador();
+
     }
 
 }

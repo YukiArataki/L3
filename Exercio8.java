@@ -7,41 +7,51 @@ Recuperação (media entre 5.1 a 6.9). */
 public class Exercio8 {
 
     public static void main(String[] args) {
+        double soma = 0;
+        int flag;
+        Aluno aluno1 = new Aluno(3);
+        aluno1.lerNome();
+        Prompt.separador();
+        Prompt.imprimir("Lendo notas:");
+        
 
-        Scanner leitor = new Scanner(System.in);
+        for(int i = 0; i < aluno1.nProvas; i++){
+            do{
 
-        String nome;
-        Double nota1, nota2, nota3, media;
+            aluno1.notas[i] = Prompt.lerDecimal("Nota["+(i + 1)+"]:");
+            
+            flag = 0;
 
-        System.out.println("Digite seu nome: ");
-        nome = leitor.next();
+            if(aluno1.notas[i] <= 10 && aluno1.notas[i] >= 0){
 
-        System.out.print("Informe sua Primeira nota ");
-        double n1 = leitor.nextDouble();
-
-        System.out.println("Informe sua Segunda nota ");
-        double n2 = leitor.nextDouble();
-
-        System.out.println("Informe sua Terceira nota");
-        double n3 = leitor.nextDouble();
-
-        media = (n1 + n2 + n3)/2;
-        System.out.println(nome + "Foi: " + media);
-
-        if (media < 5.0) {
-
-            System.out.println("Reprovado");
-        }else if (media < 7.0) {
-
-            System.out.println("Aprovado");
-        }else {
-
-            System.out.println("Recuperação");
+            soma += aluno1.notas[i];
+            }else{
+                System.out.println("nota inválida");
+                flag++;
+            }
+            }while(flag == 1);
         }
+        Prompt.separador();
+
+        Prompt.imprimir("Nome: " + aluno1.nome);
+        double mediaAritimetica = (soma)/3;
+
+        Prompt.imprimir("Nota final: " + mediaAritimetica);
+
+        if(mediaAritimetica >= 7){
+            Prompt.imprimir("Aluno Aprovado");
+
+        }else if(mediaAritimetica > 5 && mediaAritimetica < 7){
+            Prompt.imprimir("Aluno em Recuperação");
+
+        }else if(mediaAritimetica <= 5){
+            Prompt.imprimir("Aluno Reprovado");
+        }
+
+ }
         
 
         
 
     }
 
-}

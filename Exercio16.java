@@ -12,6 +12,59 @@ public class Exercio16 {
     public static void executar() {
         
         Scanner leitor = new Scanner(System.in);
-    }
 
+        Reajuste funcionario[] = new Reajuste[584];
+        String txt;
+        double porc, salMinimo = 1412;
+        boolean gerarAleatorio = false;
+
+        String escolha = Prompt.lerLinha("Deseja Implementar aleatóriamente: ");
+        
+        if(escolha.charAt(0) == 's' || escolha.charAt(0) == 'S'){
+            gerarAleatorio = true;
+        }
+
+        Prompt.separador();
+
+        for (int i = 0; i < funcionario.length; i++) {
+        
+            funcionario[i] = new Reajuste();
+
+            Prompt.imprimir("\n== Funcionário " + (i+1)+" ==");
+        if(gerarAleatorio == true){
+            funcionario[i].getSalario(Prompt.decimalAleatorio(salMinimo, (salMinimo * 50)));
+
+            txt = String.format("%.2f",  funcionario[i].salarioAntigo).replace(",", ".");
+
+            Prompt.imprimir("Salário antigo: R$" + txt);
+        }
+        else{
+            funcionario[i].getSalario(Prompt.lerDecimal("Salário antigo:"));
+        }
+
+            double j = funcionario[i].salarioAntigo;
+
+            if(j < (salMinimo * 3)){
+                porc = 1.50;
+            }
+            else if(j >= (salMinimo * 3) && j <= (salMinimo * 10)){
+                porc = 1.20;
+            }
+            else if(j > (salMinimo * 10) && j <= (salMinimo * 20)){
+                porc = 1.15;
+            }
+            else{
+                porc = 1.10;
+            }
+            funcionario[i].defPorcentagem(porc);
+
+            funcionario[i].defSalarioNovo(j * porc);
+
+            txt = String.format("%.2f",  funcionario[i].salarioNovo).replace(",", ".");
+
+            Prompt.imprimir("Novo Salario: R$" +txt);
+        }
+        Prompt.separador();
+
+    }
 }
