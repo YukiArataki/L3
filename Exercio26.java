@@ -14,97 +14,79 @@ public class Exercio26 {
         
         Scanner leitor = new Scanner(System.in);
 
-        novoSeguro.getNome(Prompt.lerLinha("Nome: "));
-        novoSeguro.getIdade(Prompt.lerInteiro("Idade:"));
+        System.out.println("Digite o nome do pretendente:");
+        String nome = leitor.nextLine();
 
-        if(novoSeguro.idade < 17 || novoSeguro.idade > 70){
-            Prompt.imprimir("não se enquadraem nenhuma das categorias ofertadas");
+        System.out.println("Digite a idade do pretendente:");
+        int idade = leitor.nextInt();
+
+        if (idade < 17 || idade > 70) {
+            System.out.println("O pretendente não se enquadra em nenhuma das categorias ofertadas.");
+            return;
         }
-        else{
-            do{
-                valido = false;
 
-                novoSeguro.getGrupoRisco(Prompt.lerCaractere("Grupo de risco(Baixo - B / Médio - M / Alto - A):"));
+        System.out.println("Digite o grupo de risco do pretendente (Baixo, Médio, Alto):");
+        String grupoRisco = leitor.next().toLowerCase();
 
-                switch (novoSeguro.grupoRisco) {
-                    case 'B':
-                        valido = true;
-                        break;
-                    case 'M':
-                        valido = true;
-                        break;
-                    case 'A':
-                        valido = true;
-                        break;
-                    default:
-                        Prompt.imprimir("Letrainválida\nDigite novamente");
-                        break;
-                }
-            }while(valido == false);
+        int categoriaSeguro = determinarCategoriaSeguro(idade, grupoRisco);
 
-            int idade = novoSeguro.idade, c = 0;
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Grupo de risco: " + grupoRisco);
+        System.out.println("Categoria de seguro: " + categoriaSeguro);
 
-            switch (novoSeguro.grupoRisco) {
-                case 'B':
-                        if(idade >= 17 && idade <= 20){
-                            c = 1;
-                        }
-                        else if(idade >= 21 && idade <= 24){
-                            c = 2;
-                        }
-                        else if(idade >= 25 && idade <= 34){
-                            c = 3;
-                        }
-                        else if(idade >= 35 && idade <= 64){
-                            c = 4;
-                        }
-                        else{
-                            c = 7;
-                        }
-                    break;
-                case 'M':
-                        if(idade >= 17 && idade <= 20){
-                            c = 2;
-                        }
-                        else if(idade >= 21 && idade <= 24){
-                            c = 3;
-                        }
-                        else if(idade >= 25 && idade <= 34){
-                            c = 4;
-                        }
-                        else if(idade >= 35 && idade <= 64){
-                            c = 5;
-                        }
-                        else{
-                            c = 8;
-                        }
-                    break;
-                case 'A':
-                        if(idade >= 17 && idade <= 20){
-                            c = 3;
-                        }
-                        else if(idade >= 21 && idade <= 24){
-                            c = 4;
-                        }
-                        else if(idade >= 25 && idade <= 34){
-                            c = 5;
-                        }
-                        else if(idade >= 35 && idade <= 64){
-                            c = 6;
-                        }
-                        else{
-                            c = 9;
-                        }
-                    break;
-                    
-                }
-                novoSeguro.defCategoria(c);
-                Prompt.separador();
-                Prompt.imprimir("Nome: " + novoSeguro.nome +"\nGrupo de Risco: " + novoSeguro.grupoRisco +"\nCategoria: " + novoSeguro.categoria);
-                Prompt.separador();
-            }
-
-
+        leitor.close();
     }
 
+    public static int determinarCategoriaSeguro(int idade, String grupoRisco) { 
+        if (idade >= 17 && idade <= 20) {
+            switch (grupoRisco) {
+                case "baixo":
+                    return 1;
+                case "médio":
+                    return 2;
+                case "alto":
+                    return 3;
+            }
+        } else if (idade >= 21 && idade <= 24) {
+            switch (grupoRisco) {
+                case "baixo":
+                    return 2;
+                case "médio":
+                    return 3;
+                case "alto":
+                    return 4;
+            }
+        } else if (idade >= 25 && idade <= 34) {
+            switch (grupoRisco) {
+                case "baixo":
+                    return 3;
+                case "médio":
+                    return 4;
+                case "alto":
+                    return 5;
+            }
+        } else if (idade >= 35 && idade <= 64) {
+            switch (grupoRisco) {
+                case "baixo":
+                    return 4;
+                case "médio":
+                    return 5;
+                case "alto":
+                    return 6;
+            }
+        } else if (idade >= 65 && idade <= 70) {
+            switch (grupoRisco) {
+                case "baixo":
+                    return 7;
+                case "médio":
+                    return 8;
+                case "alto":
+                    return 9;
+            }
+        }
+
+        return -1; 
+
+    }
 }
