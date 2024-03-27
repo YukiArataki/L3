@@ -20,7 +20,6 @@ public class Exercio6 {
         System.out.println("Valor de venda: R$" + valorVenda);
 
         leitor.close();
-
     }
 
 }

@@ -23,7 +23,8 @@ public class Exercio10 {
         } 
 
         }
-  
+
+        leitor.close();
     }
 
 }
