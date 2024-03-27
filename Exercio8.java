@@ -7,51 +7,37 @@ Recuperação (media entre 5.1 a 6.9). */
 public class Exercio8 {
 
     public static void main(String[] args) {
-        double soma = 0;
-        int flag;
-        Aluno aluno1 = new Aluno(3);
-        aluno1.lerNome();
-        Prompt.separador();
-        Prompt.imprimir("Lendo notas:");
-        
 
-        for(int i = 0; i < aluno1.nProvas; i++){
-            do{
+        Scanner leitor = new Scanner(System.in);
 
-            aluno1.notas[i] = Prompt.lerDecimal("Nota["+(i + 1)+"]:");
-            
-            flag = 0;
+        System.out.println("Digite o nome do aluno:");
+        String nomeAluno = leitor.nextLine();
 
-            if(aluno1.notas[i] <= 10 && aluno1.notas[i] >= 0){
+        System.out.println("Digite a nota da primeira prova:");
+        double nota1 = leitor.nextDouble();
 
-            soma += aluno1.notas[i];
-            }else{
-                System.out.println("nota inválida");
-                flag++;
-            }
-            }while(flag == 1);
-        }
-        Prompt.separador();
+        System.out.println("Digite a nota da segunda prova:");
+        double nota2 = leitor.nextDouble();
 
-        Prompt.imprimir("Nome: " + aluno1.nome);
-        double mediaAritimetica = (soma)/3;
+        System.out.println("Digite a nota da terceira prova:");
+        double nota3 = leitor.nextDouble();
 
-        Prompt.imprimir("Nota final: " + mediaAritimetica);
+        double media = (nota1 + nota2 + nota3) / 3;
 
-        if(mediaAritimetica >= 7){
-            Prompt.imprimir("Aluno Aprovado");
+        System.out.println("Nome do aluno: " + nomeAluno);
+        System.out.println("Média: " + media);
 
-        }else if(mediaAritimetica > 5 && mediaAritimetica < 7){
-            Prompt.imprimir("Aluno em Recuperação");
-
-        }else if(mediaAritimetica <= 5){
-            Prompt.imprimir("Aluno Reprovado");
+        if (media >= 7.0) {
+            System.out.println("Menção: Aprovado");
+        } else if (media >= 5.1 && media <= 6.9) {
+            System.out.println("Menção: Recuperação");
+        } else {
+            System.out.println("Menção: Reprovado");
         }
 
- }
+        leitor.close();
         
+ }      
 
-        
-
-    }
+}
 

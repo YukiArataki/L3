@@ -9,71 +9,51 @@ public class Exercio23 {
         
         Scanner leitor = new Scanner(System.in);
 
-        PesoIdeal pessoa = new PesoIdeal();
-        Prompt.separador();
-        pessoa.getNome(Prompt.lerLinha("Nome:"));
-        double x = 0;
-        boolean flag;
-        do{
-            flag = false;
-            pessoa.getSexo(Prompt.lerCaractere("Sexo(M/F)"));
-            
-            if(pessoa.sexo == 'm' || pessoa.sexo == 'M'){
-                flag = true;
-            }else if(pessoa.sexo == 'f' || pessoa.sexo == 'F'){
-                flag = true;
-            }else{
-                Prompt.imprimir("Sexo inválido\nDigite novamente\n");
-            }
-        }while(flag == false);
-        
-        pessoa.getAltura(Prompt.lerDecimal("Altura:"));
-        pessoa.getIdade(Prompt.lerInteiro("Idade:"));
-        Prompt.separador();
-        
-        if(pessoa.sexo == 'm' || pessoa.sexo == 'M'){
-            if(pessoa.altura > 1.7){
+        System.out.println("Digite o nome da pessoa:");
+        String nome = leitor.nextLine();
 
-                if(pessoa.idade <= 20){
-                    x = 58;
-                }
-                else if(pessoa.idade >= 21 && pessoa.idade <= 39){
-                    x = 53;
-                }
-                else if(pessoa.idade >= 40){
-                    x = 45;
-                }
+        System.out.println("Digite o sexo da pessoa (M para masculino, F para feminino):");
+        char sexo = leitor.next().toUpperCase().charAt(0);
 
-            }
-            else if(pessoa.altura <= 1.7){
+        System.out.println("Digite a altura da pessoa em metros:");
+        double altura = leitor.nextDouble();
 
-                if(pessoa.idade <= 40){
-                    x = 50;
+        System.out.println("Digite a idade da pessoa:");
+        int idade = leitor.nextInt();
+
+        double pesoIdeal;
+        if (sexo == 'M') {
+            if (altura > 1.70) {
+                if (idade <= 20) {
+                    pesoIdeal = (72.7 * altura) - 58;
+                } else if (idade >= 21 && idade <= 39) {
+                    pesoIdeal = (72.7 * altura) - 53;
+                } else {
+                    pesoIdeal = (72.7 * altura) - 45;
                 }
-                else if(pessoa.idade >40){
-                    x = 58;
+            } else {
+                if (idade <= 40) {
+                    pesoIdeal = (72.7 * altura) - 50;
+                } else {
+                    pesoIdeal = (72.7 * altura) - 58;
                 }
             }
-            pessoa.pesoIdeal = (72.7*pessoa.altura) - x;
+        } else { 
+            if (altura <= 1.50) {
+                pesoIdeal = (62.1 * altura) - 44.7;
+            } else {
+                if (idade >= 35) {
+                    pesoIdeal = (62.1 * altura) - 45;
+                } else {
+                    pesoIdeal = (62.1 * altura) - 49;
+                }
+            }
         }
-        else if(pessoa.sexo == 'f' || pessoa.sexo == 'F'){
-            if(pessoa.altura > 1.5){
-                x = 44.7;
-            }
-            else if(pessoa.altura <= 1.5){
-                if(pessoa.idade >= 35){
-                    x = 45;
-                }
-                else if(pessoa.idade < 35){
-                    x = 49;
-                }
-            }
-            pessoa.pesoIdeal = (62.1 * pessoa.altura) - x;
-        }
-        String txt = String.format("%.2f", pessoa.pesoIdeal).replace(",", ".");
-        Prompt.imprimir("Nome: " + pessoa.nome);
-        Prompt.imprimir("Peso ideal: \n" + txt + "Kg");
-        Prompt.separador();
+
+        System.out.println("Nome da pessoa: " + nome);
+        System.out.println("Peso ideal: " + pesoIdeal + " kg");
+
+        leitor.close();
 
     }
 

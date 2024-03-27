@@ -10,60 +10,43 @@ public class Exercio17 {
         
         Scanner leitor = new Scanner(System.in);
 
-        int i = 0,k=0;
-        double aumentoFolha = 0, aux = 0;
-        ArrayList<Reajuste> lista = new ArrayList<Reajuste>();
+        System.out.println("Digite o nome do funcionário:");
+        String nomeFuncionario = leitor.nextLine();
 
-        
+        System.out.println("Digite o salário do funcionário:");
+        double salarioFuncionario = leitor.nextDouble();
 
-        Prompt.separador();
-        double salarioMinimo = Prompt.lerDecimal("Valor atual do salário mínimo: ");
-        Prompt.separador();
+        System.out.println("Digite o valor do salário mínimo:");
+        double salarioMinimo = leitor.nextDouble();
 
-        do{
-            double qtdSalarios = 0;
-            
-            Reajuste funcionario = new Reajuste(); 
+        double novoSalario = calcularNovoSalario(salarioFuncionario, salarioMinimo);
 
-            Prompt.imprimir("\n== Funcionário " + (i+1)+" ==");
+        System.out.println("Nome do funcionário: " + nomeFuncionario);
+        System.out.println("Reajuste: " + calcularReajuste(salarioFuncionario, salarioMinimo) + "%");
+        System.out.println("Novo salário: R$" + novoSalario);
 
-            funcionario.getNome(Prompt.lerLinha("Nome: "));
-            funcionario.getSalario(Prompt.lerDecimal("Salário antigo: "));
-            funcionario.getQtdSalarios(salarioMinimo/funcionario.salarioAntigo);
-            qtdSalarios = Prompt.arredondar(funcionario.qtdSalarios);
-            
-            aux = salarioMinimo * qtdSalarios;
-            
-            if(aux >= funcionario.salarioAntigo){
-                funcionario.salarioNovo = aux;
-                funcionario.reajuste = funcionario.salarioNovo - funcionario.salarioAntigo;
-                aumentoFolha += funcionario.reajuste;
-            }else{
-                funcionario.salarioNovo = funcionario.salarioAntigo;
-            }
+        double aumentoFolhaPagamento = novoSalario - salarioFuncionario;
 
-            lista.add(funcionario);
-            String escolha = Prompt.lerLinha("Deseja continuar: ");
-        
-        if(escolha.charAt(0) == 'n' || escolha.charAt(0) == 'N'){
-            break;
-        }
+        System.out.println("Aumento na folha de pagamento da empresa: R$" + aumentoFolhaPagamento);
 
-        i++;
-        }while(true);
-
-        Prompt.separador();
-        k = 0;
-        for (Reajuste f : lista) {
-            Prompt.imprimir("\n== Funcionário " + (k+1)+" ==");
-            Prompt.imprimir("Salario Antigo:" + f.salarioAntigo + "\nReajuste: R$"+ (f.reajuste));
-            Prompt.imprimir("Nome:" + f.nome + "\nSalario final: R$"+ f.salarioNovo);
-            k++;
-        }
-        Prompt.separador();
-        Prompt.imprimir("A empresa vai aumentar sua folha de pagamento em R$" + aumentoFolha);
-        Prompt.separador();
-
+        leitor.close();
     }
 
+    public static double calcularReajuste(double salario, double salarioMinimo) {
+        if (salario < 3 * salarioMinimo) {
+            return 50;
+        } else if (salario >= 3 * salarioMinimo && salario <= 10 * salarioMinimo) {
+            return 20;
+        } else if (salario > 10 * salarioMinimo && salario <= 20 * salarioMinimo) {
+            return 15;
+        } else {
+            return 10;
+        }
+    }
+
+    public static double calcularNovoSalario(double salario, double salarioMinimo) {
+        double reajuste = calcularReajuste(salario, salarioMinimo) / 100.0;
+        return salario * (1 + reajuste);
+
+    }
 }

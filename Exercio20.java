@@ -15,28 +15,33 @@ public class Exercio20 {
         
         Scanner leitor = new Scanner(System.in);
 
-        int nivel;
-        boolean valido;
-        
-        Prompt.separador();
-        do{ 
-            valido = false;
-            nivel = Prompt.lerInteiro("Nivel do Professor: (1,2 ou 3):");
+        System.out.println("Digite o nível do professor (1, 2 ou 3):");
+        int nivel = leitor.nextInt();
 
-            if(nivel <= 1 && nivel >= 3){
-                Prompt.imprimir("Nível inválido\nDigite novamente\n");
-            }else{
-                valido = true;
-            }
-        }while(valido == false);
-        HoraAula professor = new HoraAula();
+        System.out.println("Digite a quantidade de horas/aula trabalhadas:");
+        int horasAula = leitor.nextInt();
 
-        professor.getNivelEDefinirHA(nivel);
+        double valorHoraAula;
+        switch (nivel) {
+            case 1:
+                valorHoraAula = 12.00;
+                break;
+            case 2:
+                valorHoraAula = 17.00;
+                break;
+            case 3:
+                valorHoraAula = 25.00;
+                break;
+            default:
+                System.out.println("Nível inválido!");
+                return;
+        }
 
-        String txt = String.format("%.2f", professor.valorHA).replace(",", ".");
+        double salario = valorHoraAula * horasAula;
 
-        Prompt.imprimir("Professor Nível "+professor.nivel+" R$"+txt+" por hora/aula");
-        Prompt.separador();
+        System.out.println("O salário do professor é: R$" + salario);
+
+        leitor.close();
 
     }
 }

@@ -14,77 +14,33 @@ public class Exercio19 {
         
         Scanner leitor = new Scanner(System.in);
 
-        Triangulo triangulo = new Triangulo(); 
-        boolean trianguloValido = false; 
-        int[] ladoTeste = new int[3];
+        System.out.println("Digite o comprimento do primeiro lado do triângulo:");
+        int lado1 = leitor.nextInt();
 
-        //ler lados e validar triangulo
-        Prompt.separador();
-        do{
-            trianguloValido = false;
+        System.out.println("Digite o comprimento do segundo lado do triângulo:");
+        int lado2 = leitor.nextInt();
 
-            for (int i = 0; i < 3; i++) {
-                triangulo.getLado(lerLado(i), i);
-                ladoTeste[i] = triangulo.lados[i];
-            }
+        System.out.println("Digite o comprimento do terceiro lado do triângulo:");
+        int lado3 = leitor.nextInt();
 
-        trianguloValido = validarTriangulo(trianguloValido, ladoTeste);
-         
-        }while(trianguloValido == false);
-
-        triangulo.tipo = defTriangulo(ladoTeste[0], ladoTeste[1], ladoTeste[2]);
-
-        Prompt.separador();
-        Prompt.imprimir("O triangulo é do tipo: "+triangulo.tipo);
-        Prompt.separador();
-    }
-    
-    public static boolean validarTriangulo(boolean trianguloValido, int ladoTeste[]){
-        if(ladoTeste[0] > ladoTeste[1] + ladoTeste[2]){
-            Prompt.imprimir("O tamanho do lado 1 é maior que a soma dos outros lados\n");
-            Prompt.separador();
-         }
-         else if(ladoTeste[1] > ladoTeste[0] +ladoTeste[2]){
-            Prompt.imprimir("O tamanho do lado 2 é maior que a soma dos outros lados");
-         }
-         else if(ladoTeste[2] > ladoTeste[0] + ladoTeste[1]){
-            Prompt.imprimir("O tamanho do lado 3 é maior que a soma dos outros lados");
-         }
-         else{
-            trianguloValido = true;
-            Prompt.imprimir("Triangulo válido");
-         }
-
-         return trianguloValido;
-    }
-
-    public static int lerLado(int i){
-        int lado;
-            do{
-                lado = Prompt.lerInteiro("Lado " + (i + 1)+ ":");
-
-                if(lado <= 0){
-                    Prompt.imprimir("->Tamanho inválido\nDigite novamente\n");
-                }
-            }while(lado <= 0);
-
-            return lado;
-    }
-
-    public static String defTriangulo(int x, int y, int z){
-        String tipo;
-
-        if(x == y && x == z){
-            tipo = "Equilátero";
-        }
-        else if(x == y || x == z){
-            tipo = "Isóceles";
-        }else{
-            tipo = "Escaleno";
-        }
+        if (isTriangulo(lado1, lado2, lado3)) {
         
-        return tipo;
+            if (lado1 == lado2 && lado2 == lado3) {
+                System.out.println("Os lados formam um triângulo equilátero.");
+            } else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+                System.out.println("Os lados formam um triângulo isóscele.");
+            } else {
+                System.out.println("Os lados formam um triângulo escaleno.");
+            }
+        } else {
+            System.out.println("Os lados não formam um triângulo.");
+        }
 
+        leitor.close();
+    }
+
+    public static boolean isTriangulo(int lado1, int lado2, int lado3) {
+        return (lado1 < lado2 + lado3) && (lado2 < lado1 + lado3) && (lado3 < lado1 + lado2);
     }
 
 }

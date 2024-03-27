@@ -8,17 +8,41 @@ public class Exercio18 {
 
     public static void executar() {
 
-        Abono funcionario1 = new Abono();
+        Scanner leitor = new Scanner(System.in);
 
-        funcionario1.getNome(Prompt.lerLinha("Nome:"));
-        funcionario1.getIdade(Prompt.lerInteiro("Idade:"));
-        funcionario1.getSexo(Prompt.lerCaractere("Sexo:"));
-        funcionario1.getSalarioFixo(Prompt.lerDecimal("Salário fixo:"));
-        funcionario1.salarioLiquido = funcionario1.calcSalarioLiquido(funcionario1.abono);
-        Prompt.separador();
-        Prompt.imprimir("Nome: " + funcionario1.nome + "\nSalário liquido: R$" + funcionario1.salarioLiquido);
-        Prompt.separador();
+        System.out.println("Digite o nome do funcionário:");
+        String nome = leitor.nextLine();
 
+        System.out.println("Digite a idade do funcionário:");
+        int idade = leitor.nextInt();
+
+        System.out.println("Digite o sexo do funcionário (M para masculino, F para feminino):");
+        char sexo = leitor.next().toUpperCase().charAt(0);
+
+        System.out.println("Digite o salário fixo do funcionário:");
+        double salarioFixo = leitor.nextDouble();
+
+        double abono;
+        if (sexo == 'M') {
+            if (idade >= 30) {
+                abono = 100.00;
+            } else {
+                abono = 50.00;
+            }
+        } else { 
+            if (idade >= 30) {
+                abono = 200.00;
+            } else {
+                abono = 80.00;
+            }
+        }
+
+        double salarioLiquido = salarioFixo + abono;
+
+        System.out.println("Nome do funcionário: " + nome);
+        System.out.println("Salário líquido acrescido do abono: R$" + salarioLiquido);
+
+        leitor.close();
     }
 
 }

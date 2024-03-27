@@ -13,35 +13,31 @@ public class Exercio24 {
         
         Scanner leitor = new Scanner(System.in);
 
-        Aluno aluno = new Aluno(3);
-        int flag;
+        System.out.println("Digite a nota do trabalho de laboratório (0 a 10):");
+        double notaLaboratorio = leitor.nextDouble();
 
-        for(int i = 0; i < aluno.nProvas; i++){
+        System.out.println("Digite a nota da avaliação semestral (0 a 10):");
+        double notaSemestral = leitor.nextDouble();
 
-            do{
+        System.out.println("Digite a nota do exame final (0 a 10):");
+        double notaExameFinal = leitor.nextDouble();
 
-            aluno.notas[i] = Prompt.lerDecimal("Nota["+(i + 1)+"]:");
-            
-            flag = 0;
+        double notaFinal = calcularNotaFinal(notaLaboratorio, notaSemestral, notaExameFinal);
 
-            if(aluno.notas[i] <= 10 && aluno.notas[i] >= 0){
+        System.out.println("A nota final do estudante é: " + notaFinal);
 
-            }else{
-                System.out.println("nota inválida");
-                flag++;
-            }
-            }while(flag == 1);
-            aluno.pesos[0] = 2;
-            aluno.pesos[1] = 3;
-            aluno.pesos[2] = 5;
+        leitor.close();
+    }
 
-            aluno.notaFinal = ((aluno.notas[0] * aluno.pesos[0]) + (aluno.notas[1] * aluno.pesos[1]) + (aluno.notas[2] * aluno.pesos[2]))/(aluno.pesos[0] + aluno.pesos[1] + aluno.pesos[2]);
-            
-        }
-        Prompt.separador();
-        Prompt.imprimir("Nota final: "+aluno.notaFinal);
-        Prompt.separador();
+    public static double calcularNotaFinal(double notaLaboratorio, double notaSemestral, double notaExameFinal) {
+     
+        double pesoLaboratorio = 2;
+        double pesoSemestral = 3;
+        double pesoExameFinal = 5;
 
+        double notaFinal = (notaLaboratorio * pesoLaboratorio + notaSemestral * pesoSemestral + notaExameFinal * pesoExameFinal) / (pesoLaboratorio + pesoSemestral + pesoExameFinal);
+
+        return notaFinal;
     }
 
 }

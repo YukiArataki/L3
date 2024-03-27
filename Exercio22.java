@@ -13,42 +13,33 @@ public class Exercio22 {
         
         Scanner leitor = new Scanner(System.in);
 
-        double gasto;
-        boolean flag;
-        Prompt.separador();
-        do{
-            flag = false;
-            cliente.getEstabelecimento(Prompt.lerInteiro("Tipo de estabelecimento: (1 - Residência, 2 - Comércio, 3 - Indústria)"));
-            switch (cliente.estabelecimento) {
-                case 1:
-                    flag = true;  
-                    break;
-                case 2:
-                    flag = true;
-                    break;
-                case 3:
-                    flag = true;
-                    break;    
-                default:
-                    Prompt.imprimir("Valor inválido\ndigite novamente");
-                    break;
-            }
-        }while(flag == false);
-        
-            cliente.getConsumo(Prompt.lerDecimal("Consumo do mês da residência em KW/h:"));
-            Prompt.separador();
+        System.out.println("Digite o tipo de cliente (1 para Residência, 2 para Comércio, 3 para Indústria):");
+        int tipoCliente = leitor.nextInt();
 
-        if(cliente.estabelecimento == 1){
-            gasto = 0.6;
-        }else if(cliente.estabelecimento == 2){
-            gasto = 0.48;
-        }else{
-            gasto = 1.29;
+        System.out.println("Digite o consumo em KW/h:");
+        double consumoKWh = leitor.nextDouble();
+
+        double valorKWh;
+        switch (tipoCliente) {
+            case 1:
+                valorKWh = 0.602;
+                break;
+            case 2:
+                valorKWh = 0.483;
+                break;
+            case 3:
+                valorKWh = 1.29;
+                break;
+            default:
+                System.out.println("Tipo de cliente inválido!");
+                return;
         }
-        cliente.precoFinal = cliente.consumo * gasto;
-        Prompt.imprimir("Custo final do mês:\nR$" + cliente.precoFinal);
-        Prompt.separador();
-        
+
+        double valorConta = consumoKWh * valorKWh;
+
+        System.out.println("O valor da conta de luz é: R$" + valorConta);
+
+        leitor.close();
 
     }
 
